@@ -2,6 +2,8 @@
 
 Prototipo non richiesto, costruito di mia iniziativa durante una candidatura in una legaltech italiana. È pensato come strumento interno per il team commerciale (SDR/BDR). Non è affiliato all'azienda né approvato da lei.
 
+**Live:** https://legal-events-radar.vercel.app
+
 ## Cos'è
 
 Events Radar è un prototipo di dashboard che aggrega e visualizza eventi, convegni, corsi di formazione e opportunità di partnership nel settore legale italiano e internazionale. Raccoglie dati da fonti pubbliche tramite scraping automatizzato e li presenta in un'interfaccia filtrabile per territorio, tipo di evento, periodo e mercato.
