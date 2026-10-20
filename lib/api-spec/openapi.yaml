@@ -1,0 +1,396 @@
+openapi: 3.1.0
+info:
+  title: Api
+  version: 0.3.0
+  description: Events Radar API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: events
+    description: Event operations
+  - name: fonti
+    description: Sources operations
+  - name: kpi
+    description: KPI aggregates
+
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /events:
+    get:
+      operationId: listEvents
+      tags: [events]
+      summary: List events with optional filters
+      parameters:
+        - name: luogo
+          in: query
+          schema:
+            type: string
+        - name: tipo_evento
+          in: query
+          schema:
+            $ref: "#/components/schemas/TipoEvento"
+        - name: mercato
+          in: query
+          schema:
+            $ref: "#/components/schemas/Mercato"
+        - name: stato_opportunita
+          in: query
+          schema:
+            $ref: "#/components/schemas/StatoOpportunita"
+        - name: data_da
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: data_a
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: includi_passati
+          in: query
+          schema:
+            type: boolean
+            default: false
+          description: If false (default), only future/ongoing events are returned
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 200
+            default: 200
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+      responses:
+        "200":
+          description: List of events
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  events:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/EventWithOpportunita"
+                  total:
+                    type: integer
+                required:
+                  - events
+                  - total
+
+  /events/{id}:
+    get:
+      operationId: getEvent
+      tags: [events]
+      summary: Get a single event by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Event detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EventWithOpportunita"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /fonti:
+    get:
+      operationId: listFonti
+      tags: [fonti]
+      summary: List all scraping sources with status
+      responses:
+        "200":
+          description: List of sources
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fonti:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Fonte"
+                required:
+                  - fonti
+
+  /kpi:
+    get:
+      operationId: getKpi
+      tags: [kpi]
+      summary: Get aggregate KPI counts
+      parameters:
+        - name: luogo
+          in: query
+          schema:
+            type: string
+        - name: tipo_evento
+          in: query
+          schema:
+            $ref: "#/components/schemas/TipoEvento"
+        - name: mercato
+          in: query
+          schema:
+            $ref: "#/components/schemas/Mercato"
+        - name: stato_opportunita
+          in: query
+          schema:
+            $ref: "#/components/schemas/StatoOpportunita"
+        - name: data_da
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: data_a
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: includi_passati
+          in: query
+          schema:
+            type: boolean
+            default: false
+          description: If false (default), only future/ongoing events are counted
+      responses:
+        "200":
+          description: KPI aggregates
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Kpi"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+
+    TipoEvento:
+      type: string
+      enum:
+        - convegno
+        - corso_formativo
+        - fiera_legaltech
+        - congresso
+        - webinar
+        - altro
+
+    Mercato:
+      type: string
+      enum:
+        - italia
+        - internazionale
+
+    StatoOpportunita:
+      type: string
+      enum:
+        - non_contattato
+        - contattato
+        - risposto
+        - non_risposto
+        - archiviato
+
+    StatoScraper:
+      type: string
+      enum:
+        - attivo
+        - errore
+        - disattivato
+
+    TipoFonte:
+      type: string
+      enum:
+        - aggregatore
+        - ordine
+        - associazione
+        - legaltech
+        - ente_formativo
+
+    Evento:
+      type: object
+      properties:
+        id:
+          type: integer
+        titolo:
+          type: string
+        dataInizio:
+          type: string
+          format: date
+          nullable: true
+        dataFine:
+          type: string
+          format: date
+          nullable: true
+        luogo:
+          type: string
+          nullable: true
+        lat:
+          type: number
+          nullable: true
+        lng:
+          type: number
+          nullable: true
+        tipoEvento:
+          $ref: "#/components/schemas/TipoEvento"
+        organizzatore:
+          type: string
+          nullable: true
+        creditiFormativi:
+          type: integer
+          nullable: true
+        urlSorgente:
+          type: string
+          nullable: true
+        idFonte:
+          type: integer
+          nullable: true
+        mercato:
+          $ref: "#/components/schemas/Mercato"
+        dataInserimento:
+          type: string
+          format: date-time
+        dataUltimoAggiornamento:
+          type: string
+          format: date-time
+      required:
+        - id
+        - titolo
+        - tipoEvento
+        - mercato
+        - dataInserimento
+        - dataUltimoAggiornamento
+
+    Opportunita:
+      type: object
+      properties:
+        id:
+          type: integer
+        idEvento:
+          type: integer
+        stato:
+          $ref: "#/components/schemas/StatoOpportunita"
+        note:
+          type: string
+          nullable: true
+        dataUltimoAggiornamento:
+          type: string
+          format: date-time
+      required:
+        - id
+        - idEvento
+        - stato
+        - dataUltimoAggiornamento
+
+    EventWithOpportunita:
+      allOf:
+        - $ref: "#/components/schemas/Evento"
+        - type: object
+          properties:
+            opportunita:
+              $ref: "#/components/schemas/Opportunita"
+              nullable: true
+            nomeFonte:
+              type: string
+              nullable: true
+
+    Fonte:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        urlBase:
+          type: string
+        tipoFonte:
+          $ref: "#/components/schemas/TipoFonte"
+        paese:
+          type: string
+        statoScraper:
+          $ref: "#/components/schemas/StatoScraper"
+        ultimoScrape:
+          type: string
+          format: date-time
+          nullable: true
+        conteggioEventi:
+          type: integer
+          nullable: true
+      required:
+        - id
+        - nome
+        - urlBase
+        - tipoFonte
+        - paese
+        - statoScraper
+
+    Kpi:
+      type: object
+      properties:
+        totaleEventi:
+          type: integer
+        questoMese:
+          type: integer
+        italia:
+          type: integer
+        internazionale:
+          type: integer
+        nonContattato:
+          type: integer
+        contattato:
+          type: integer
+        risposto:
+          type: integer
+        nonRisposto:
+          type: integer
+      required:
+        - totaleEventi
+        - questoMese
+        - italia
+        - internazionale
+        - nonContattato
+        - contattato
+        - risposto
+        - nonRisposto

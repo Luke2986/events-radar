@@ -1,0 +1,12 @@
+{
+  "events": [
+    {"titolo": "TOUCH & TECH: Session III", "data_inizio": "2026-04-21"},
+    {"titolo": "GLTHmilano ITALIA SPRING", "data_inizio": "2026-05-06"},
+    {"titolo": "TOUCH & TECH: Session IV", "data_inizio": "2026-05-20"},
+    {"titolo": "LEGALTECH MEET & MATCH!", "data_inizio": "2026-06-16"},
+    {"titolo": "Event GLTHpoints June", "data_inizio": "2026-06-24"},
+    {"titolo": "GLTHEDGE Summer", "data_inizio": "2026-07-08"},
+    {"titolo": "GLTHday AUTUMN", "data_inizio": "2026-10-07"},
+    {"titolo": "GLTHmilano ITALIA AUTUMN", "data_inizio": "2026-11-11"}
+  ]
+}

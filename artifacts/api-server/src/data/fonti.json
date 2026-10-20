@@ -1,0 +1,121 @@
+[
+  {
+    "id": 1,
+    "nome": "ISI Formazione",
+    "urlBase": "https://www.isiformazione.it/ita/_V2.0_risultatiricerca.asp?TipoOrdine=Avvocati&Luogo=Tutti",
+    "tipoFonte": "aggregatore",
+    "paese": "Italia"
+  },
+  {
+    "id": 2,
+    "nome": "CNF Calendario",
+    "urlBase": "https://www.consiglionazionaleforense.it/web/cnf-news/calendario-eventi",
+    "tipoFonte": "associazione",
+    "paese": "Italia"
+  },
+  {
+    "id": 3,
+    "nome": "Legal Tech Forum",
+    "urlBase": "https://forum.legaltechitaly.com/",
+    "tipoFonte": "legaltech",
+    "paese": "Italia"
+  },
+  {
+    "id": 4,
+    "nome": "GLTH Milano",
+    "urlBase": "https://www.hublegaltech.com/agenda",
+    "tipoFonte": "legaltech",
+    "paese": "Italia"
+  },
+  {
+    "id": 5,
+    "nome": "LegalTechTalk",
+    "urlBase": "https://www.legaltech-talk.com/",
+    "tipoFonte": "legaltech",
+    "paese": "Europa"
+  },
+  {
+    "id": 6,
+    "nome": "Lexpo",
+    "urlBase": "https://lexpo.com/",
+    "tipoFonte": "legaltech",
+    "paese": "Paesi Bassi"
+  },
+  {
+    "id": 7,
+    "nome": "Camera Civile di Rimini",
+    "urlBase": "https://www.cameracivilerimini.it/formazione/",
+    "tipoFonte": "ente_formativo",
+    "paese": "Italia"
+  },
+  {
+    "id": 8,
+    "nome": "AIGA",
+    "urlBase": "https://www.aiga.it/",
+    "tipoFonte": "associazione",
+    "paese": "Italia"
+  },
+  {
+    "id": 9,
+    "nome": "ANF",
+    "urlBase": "https://www.associazionenazionaleforense.it/",
+    "tipoFonte": "associazione",
+    "paese": "Italia"
+  },
+  {
+    "id": 10,
+    "nome": "IBA",
+    "urlBase": "https://www.ibanet.org/conferences",
+    "tipoFonte": "associazione",
+    "paese": "Internazionale"
+  },
+  {
+    "id": 11,
+    "nome": "ABA",
+    "urlBase": "https://www.americanbar.org/events-cle/",
+    "tipoFonte": "associazione",
+    "paese": "USA"
+  },
+  {
+    "id": 12,
+    "nome": "INTA",
+    "urlBase": "https://www.inta.org/events/",
+    "tipoFonte": "associazione",
+    "paese": "Internazionale"
+  },
+  {
+    "id": 13,
+    "nome": "Camera Arbitrale di Milano",
+    "urlBase": "https://www.camera-arbitrale.it/it/eventi/",
+    "tipoFonte": "ente_formativo",
+    "paese": "Italia"
+  },
+  {
+    "id": 14,
+    "nome": "Federprivacy",
+    "urlBase": "https://www.federprivacy.org/eventi/",
+    "tipoFonte": "associazione",
+    "paese": "Italia"
+  },
+  {
+    "id": 15,
+    "nome": "Scuola Forense Milano",
+    "urlBase": "https://www.scuolaforensemilano.it/servizi/formazione-continua/",
+    "tipoFonte": "ente_formativo",
+    "paese": "Italia"
+  },
+  {
+    "id": 16,
+    "nome": "Fondazione Forense Firenze",
+    "urlBase": "https://www.fondazioneforensefirenze.it/",
+    "tipoFonte": "ente_formativo",
+    "paese": "Italia"
+  },
+  {
+    "id": 17,
+    "nome": "FEST Formazione Forense",
+    "urlBase": "https://fondazionest.com/events/",
+    "tipoFonte": "ente_formativo",
+    "paese": "Italia"
+  }
+]

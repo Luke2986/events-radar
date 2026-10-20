@@ -1,0 +1,27 @@
+[project]
+name = "events-radar-scraper"
+version = "0.1.0"
+description = "Events Radar scraper"
+requires-python = ">=3.11"
+dependencies = [
+    "beautifulsoup4>=4.14.3",
+    "lxml>=6.0.2",
+    "psycopg2-binary>=2.9.11",
+    "requests>=2.33.1",
+    "google-generativeai>=0.8.0",
+    "python-Levenshtein>=0.25.0",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["scraper/tests"]
+# Add the repository root to sys.path so `from scraper.scraper import ...`
+# resolves against the `scraper/` regular package (see scraper/__init__.py).
+pythonpath = ["."]
+markers = [
+    "llm: marks tests that require GEMINI_API_KEY and live LLM calls (deselect with '-m \"not llm\"')",
+]

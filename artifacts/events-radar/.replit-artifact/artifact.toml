@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Events Radar"
+version = "1.0.0"
+id = "artifacts/events-radar"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25482
+
+[services.development]
+run = "pnpm --filter @workspace/events-radar run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/events-radar", "run", "build" ]
+publicDir = "artifacts/events-radar/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25482"
+BASE_PATH = "/"

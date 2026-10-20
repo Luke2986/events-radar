@@ -1,0 +1,31 @@
+kind = "api"
+previewPath = "/api"
+title = "API Server"
+version = "1.0.0"
+id = "3B4_FFSkEVBkAeYMFRJ2e"
+
+[[services]]
+localPort = 8080
+name = "API Server"
+paths = ["/api"]
+
+[services.env]
+PORT = "8080"
+NODE_ENV = "production"
+
+[services.development]
+run = "pnpm --filter @workspace/api-server run dev"
+
+[services.production]
+deployment = "vm"
+run = "node --enable-source-maps artifacts/api-server/dist/index.mjs"
+
+[services.production.build]
+args = ["pnpm", "--filter", "@workspace/api-server", "run", "build:prod"]
+
+[services.production.build.env]
+NODE_ENV = "production"
+CI = "true"
+
+[services.production.health.startup]
+path = "/api/healthz"
